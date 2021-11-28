@@ -1,7 +1,6 @@
-import type { NextPage } from 'next';
-import FeaturedPosts from '../components/home/featured-posts';
-import Hero from '../components/home/hero';
-import { Post } from '../types/post';
+import { NextPage } from 'next';
+import AllPosts from '../../components/posts/all-posts';
+import type { Post } from '../../types/post';
 
 const DUMMY_POSTS: Post[] = [
     {
@@ -34,13 +33,12 @@ const DUMMY_POSTS: Post[] = [
     },
 ];
 
-const Home: NextPage = () => {
+const AllPostsPage: NextPage = () => {
     return (
         <div>
-            <Hero />
-            <FeaturedPosts posts={DUMMY_POSTS} />
+            <AllPosts posts={DUMMY_POSTS} />
         </div>
     );
 };
 
-export default Home;
+export default AllPostsPage;
