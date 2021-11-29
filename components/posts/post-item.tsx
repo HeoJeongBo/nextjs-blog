@@ -18,6 +18,7 @@ const PostItem: React.FC<PostItemProps> = ({ post }) => {
     });
 
     const imagePath = `/images/posts/${slug}/${image}`;
+    console.log(imagePath);
     const linkPath = `/posts/${slug}`;
 
     return (

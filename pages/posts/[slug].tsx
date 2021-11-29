@@ -1,11 +1,8 @@
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
+import PostContent from '../../components/posts/post-detail/post-content';
 
 const SinglePostPage: NextPage = () => {
-    return (
-        <div>
-            <h1>Single Post Page</h1>
-        </div>
-    );
+    return <PostContent />;
 };
 
 export default SinglePostPage;
