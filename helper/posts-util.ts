@@ -6,13 +6,17 @@ import type { PostData, PostMdMetaData } from '../types/post';
 
 const postsDirectory: string = path.join(process.cwd(), 'posts');
 
-export const getPostData = (fileName: string): PostData => {
-    const filePath = path.join(postsDirectory, fileName);
+export const getPostsFiles = () => {
+    return fs.readdirSync(postsDirectory);
+};
+
+export const getPostData = (postIdentifier: string): PostData => {
+    const postSlug = postIdentifier.replace(/\.md$/, '');
+    const filePath = path.join(postsDirectory, `${postSlug}.md`);
     const fileContent = fs.readFileSync(filePath, 'utf-8');
 
     const { data, content } = matter(fileContent);
 
-    const postSlug = fileName.replace(/\.md$/, '');
     const dataWithType = data as PostMdMetaData;
 
     const postData: PostData = {
@@ -25,7 +29,7 @@ export const getPostData = (fileName: string): PostData => {
 };
 
 export const getAllPosts = (): PostData[] => {
-    const postFiles = fs.readdirSync(postsDirectory);
+    const postFiles = getPostsFiles();
 
     const allPosts = postFiles.map((postFile) => {
         return getPostData(postFile);
