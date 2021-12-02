@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import type { Post } from '../../../types/post';
 import PostHeader from './post-header';
@@ -10,15 +12,6 @@ import { Options } from 'react-markdown/lib/ast-to-react';
 interface PostContentProps {
     post: Post;
 }
-
-const DUMMY_POST: Post = {
-    slug: 'getting-started-with-nextjs',
-    title: 'Getting Started with NextJS',
-    image: 'getting-started-nextjs.png',
-    excerpt: 'NextJS is a the React Fraework for production',
-    date: '2022-02-10',
-    content: '## hihi',
-};
 
 const PostContent: React.FC<PostContentProps> = ({ post }) => {
     const { slug, image, title, content } = post;
@@ -44,8 +37,23 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
                     </div>
                 );
             }
-            // Return default child if it's not an image
+
             return <p>{children}</p>;
+        },
+
+        code: (code: any) => {
+            const {
+                node: { children },
+                className,
+            } = code;
+
+            const lang = (className || '').replace('language-', '');
+
+            return (
+                <SyntaxHighlighter language={lang} style={atomDark}>
+                    {children[0].value}
+                </SyntaxHighlighter>
+            );
         },
     };
 

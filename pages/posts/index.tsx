@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { GetStaticProps, NextPage } from 'next';
 import AllPosts from '../../components/posts/all-posts';
 import { getAllPosts } from '../../helper/posts-util';
@@ -10,6 +11,10 @@ interface AllPostsPageProps {
 const AllPostsPage: NextPage<AllPostsPageProps> = ({ allPosts }) => {
     return (
         <div>
+            <Head>
+                <title>All my posts</title>
+                <meta name="description" content="All Jeongbo`s post" />
+            </Head>
             <AllPosts posts={allPosts} />
         </div>
     );
