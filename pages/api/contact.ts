@@ -34,7 +34,7 @@ const handler: NextApiHandler = async (req, res) => {
 
         try {
             client = await MongoClient.connect(
-                'mongodb+srv://heojeongbo:Vrrhb3xsT0eOlDgK@cluster0.fa2lq.mongodb.net/my-site?retryWrites=true&w=majority'
+                `mongodb+srv://${process.env.DB_HOST}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}/${process.env.DB_DATABASE}?retryWrites=true&w=majority`
             );
         } catch (err: any) {
             res.status(500).json({ message: 'Colud not connect to database' });
